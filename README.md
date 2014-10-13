@@ -31,17 +31,19 @@ Configuration
 -------------
 To use Logsandra, you need to configure your Cassandra cluster. Below is the current Keyspace configuration needed by Logsandra:
 
-    <Keyspaces>
-        <Keyspace Name="logsandra">
-            <ColumnFamily Name="entries" CompareWith="BytesType" />
-            <ColumnFamily Name="by_date" CompareWith="LongType" />
-            <ColumnFamily Name="by_date_data" CompareWith="LongType" />
-            <ColumnFamily Name="categories" CompareWith="UTF8Type" />
-          <ReplicaPlacementStrategy>org.apache.cassandra.locator.RackUnawareStrategy</ReplicaPlacementStrategy>
-          <ReplicationFactor>3</ReplicationFactor>
-          <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>
-        </Keyspace>
-    </Keyspaces>
+```xml
+<Keyspaces>
+    <Keyspace Name="logsandra">
+        <ColumnFamily Name="entries" CompareWith="BytesType" />
+        <ColumnFamily Name="by_date" CompareWith="LongType" />
+        <ColumnFamily Name="by_date_data" CompareWith="LongType" />
+        <ColumnFamily Name="categories" CompareWith="UTF8Type" />
+      <ReplicaPlacementStrategy>org.apache.cassandra.locator.RackUnawareStrategy</ReplicaPlacementStrategy>
+      <ReplicationFactor>3</ReplicationFactor>
+      <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>
+    </Keyspace>
+</Keyspaces>
+```
 
 (In Cassandra 0.7 and higher you will not need to change the Keyspace configuration manually, but as for now Cassandra 0.7 is in development and not supported by Logsandra)
 
@@ -91,12 +93,14 @@ To create your own Logsandra parser you need to create a python file in this dir
 
 The name of the file should be in lower case and end with '.py', an example of a files content (the filename is foo.py):
 
-    from logsandra.monitor.parsers import BaseParser
+```python
+from logsandra.monitor.parsers import BaseParser
 
-    class FooParser(BaseParser):
-        def parse(self, line, source, data):
-            date = None
-            keywords = []
-            return self.log_entries.add(date=date, entry=line, source=source, keywords=keywords)
+class FooParser(BaseParser):
+    def parse(self, line, source, data):
+        date = None
+        keywords = []
+        return self.log_entries.add(date=date, entry=line, source=source, keywords=keywords)
+```
 
 A better example is to study how existing parsers work in logsandra/monitor/parsers/ directory. 
