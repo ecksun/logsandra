@@ -7,15 +7,15 @@ Requirements
 ------------
 Cassandra 0.6.x, Python 2.6/2.7 (not tested with Python 3.x) and the following Python modules:
 
-    * Pylons >= 1.0
-    * Jinja2
-    * PyYAML
-    * Pycassa
-    * python-dateutil
-    * CherryPy >= 3.1
-    * Thrift
-    * ordereddict
-    * Cassandra (not automatically installed during the installation phase)
+* Pylons >= 1.0
+* Jinja2
+* PyYAML
+* Pycassa
+* python-dateutil
+* CherryPy >= 3.1
+* Thrift
+* ordereddict
+* Cassandra (not automatically installed during the installation phase)
 
 
 Installation
